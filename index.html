@@ -1,0 +1,41 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Solver</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <form action="/" method="post">
+        <h1>Wordle Solver</h1>
+        <label for="task"><strong>Your Guess</strong></label>
+        <input type="text" id="guess" name="guess" placeholder="Type here" required>
+        <br>
+        <label for="time"><strong>Feedback for the guess</strong></label>
+        <input type="text" id="feedback" name="feedback" placeholder="Type here" required>
+        <br>
+        <div id="c-but">
+            <input type="submit" value="Generate">
+        </div>
+    </form>
+    <div id="answer">
+        {% autoescape false %}
+            {{ result }}
+        {% endautoescape %}
+    </div>
+    <div id="show-dropdown">Show Remaining Possibilities <span id="arrow-icon">&#9660;</span></div>
+    <div id="dropdown-list">
+        <h2>Remaining Possibilities:</h2>
+        <ul>
+            {% for word in word_list %}
+                <li>{{ word }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
